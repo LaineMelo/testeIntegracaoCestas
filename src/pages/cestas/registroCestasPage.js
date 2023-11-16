@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import {Button} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { TextInput, Text } from 'react-native-paper';
 
 import Container from '../../components/Container';
 import Header from '../../components/Header';
@@ -27,7 +27,7 @@ const RegistroCestaPage = () => {
       };
 
       // Fazer uma solicitação POST para a API com os dados do formulário
-      const response = await axios.post('https://10.0.2.2:7164/swagger/index.html/api/RegistroCesta'
+      const response = await axios.post('https://localhost:7164/api/RegistroCesta'
       , data);
 
       // Aqui, você pode lidar com a resposta da API conforme necessário
@@ -42,6 +42,12 @@ const RegistroCestaPage = () => {
       <Container>
         <Header title={'Entrega de Cesta'} />
         <Body>
+
+        <Text 
+          style={styles.title}
+          variant="displayLarge">
+          Cesta
+        </Text>
 
         <TextInput
           style={styles.input}
@@ -75,12 +81,17 @@ const RegistroCestaPage = () => {
           onChangeText={text => setObservacao(text)}
         />
 
-        <Button 
-        icon="content-save" 
-        mode="contained" 
-        onPress={handleRegistro}>
-          Registrar
-        </Button>
+        <div style={{ display: "flex", 
+          justifyContent: "center", 
+          alignItems: "center" }}>
+          <Button
+          style={styles.button}
+          icon="content-save"
+          mode="contained"
+          onPress={handleRegistro}>
+            Registrar
+          </Button>
+        </div>
 
         </Body>      
       </Container>
@@ -91,6 +102,16 @@ const RegistroCestaPage = () => {
 const styles = StyleSheet.create({
   input:{
     marginBottom:10,
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 25,
+    marginBottom:20
+  },
+  button: {
+    width: 200,
+    backgroundColor:'#787878',
+    marginBottom:8
   }
 });
 

@@ -7,14 +7,18 @@ import CadastroBeneficiarioPage from '../pages/beneficiario/cadastroBeneficiario
 import RegistroCesta from '../pages/cestas/registroCestasPage';
 import NecessidadesBeneficiarioPage from '../pages/necessidades/necessidadesBeneficiariosPage';
 import CadastroNecessidadesBeneficiarioPage from '../pages/necessidades/cadastroNecessidadesPage';
-import VoluntarioPage from '../pages/voluntarios/cadastroVoluntariosPage';
+import VoluntarioPage from '../pages/voluntarios/voluntarioPage';
+import CadastroVoluntarioPage from '../pages/voluntarios/cadastroVoluntarioPage';
+import EdicaoVoluntarioPage from '../pages/voluntarios/edicaoVoluntarioPage';
+import CadastoDependentesPage from '../dependentes/CadastroDependentesPage';
+import edicaoBeneficiarioPage from '../pages/beneficiario/edicaoBeneficiarioPage';
 
 const Stack = createNativeStackNavigator();
 
 const Main = () => {
 
   return (
-      <Stack.Navigator initialRouteName="home">
+      <Stack.Navigator initialRouteName="login">
         
         <Stack.Screen 
         name="login" 
@@ -61,6 +65,30 @@ const Main = () => {
         <Stack.Screen 
         name="voluntario" 
         component={VoluntarioPage}
+        options={{ header:() => null }}
+        />
+
+        <Stack.Screen 
+        name="cadastroVoluntario" 
+        component={CadastroVoluntarioPage}
+        options={{ header:() => null }}
+        />
+
+        <Stack.Screen 
+        name="edicaoVoluntario" 
+        component={EdicaoVoluntarioPage}
+        options={{ header:() => null }}
+        />
+
+      <Stack.Screen 
+        name="cadastroDependentes" 
+        component={CadastoDependentesPage}
+        options={{ header:() => null }}
+        />
+
+      <Stack.Screen 
+        name="edicaoBeneficiario" 
+        component={edicaoBeneficiarioPage}
         options={{ header:() => null }}
         />
 

@@ -3,7 +3,6 @@ import { Button } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { TextInput, Text, Divider } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
-import { FAB } from 'react-native-paper';
 
 import Container from '../../components/Container';
 import Header from '../../components/Header';
@@ -11,25 +10,23 @@ import Body from '../../components/Body';
 
 import { useNavigation } from '@react-navigation/native';
 
-const CadastroBeneficiarioPage = () => {
+const CadastroVoluntarioPage = () => {
 
   const navigation = useNavigation();
 
   const [nome, setNome] = useState("");
-  const [apelido, setApelido] = useState("");
-  const [rg, setRg] = useState("");
   const [cpf, setCpf] = useState("");
-  const [telefone, setTelefone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [logradouro, setLogradouro] = useState("");
   const [bairro, setBairro] = useState("");
   const [numero, setNumero] = useState("");
   const [cidade, setCidade] = useState("");
-  const [foto, setFoto] = useState("");
 
   const handleCadastro = async () => {
     try {
 
-      const response = await fetch('https://localhost:7164/api/Beneficiarios'
+      const response = await fetch('https://localhost:7164/api/Voluntario'
         , {
           method: 'POST',
           headers: {
@@ -37,22 +34,20 @@ const CadastroBeneficiarioPage = () => {
           },
           body: JSON.stringify({
             nome,
-            apelido,
-            rg,
             cpf,
-            telefone,
+            email,
+            password,
             logradouro,
             bairro,
             numero,
             cidade,
-            foto,
           }),
         });
 
       if (response.ok) {
-        console.log('Beneficiário registrado com sucesso!');
+        console.log('Voluntário registrado com sucesso!');
       } else {
-        console.error('Erro ao registrar beneficiário!');
+        console.error('Erro ao registrar voluntário!');
 
       }
     } catch (error) {
@@ -62,13 +57,13 @@ const CadastroBeneficiarioPage = () => {
 
   return (
     <Container>
-      <Header title={'Beneficiario'} />
+      <Header title={'Voluntario'} />
       <Body>
 
       <Text
           style={styles.title}
           variant="displayLarge">
-          Cadastrar Beneficiário
+          Cadastrar Voluntário
         </Text>
 
         <div style={{ display: "flex", 
@@ -79,7 +74,7 @@ const CadastroBeneficiarioPage = () => {
 
         <br/>
 
-        <button className="btn btn-light btn-sm" onClick={() => navigation.navigate('beneficiario')}>Voltar</button>
+        <button className="btn btn-light btn-sm" onClick={() => navigation.navigate('home')}>Voltar</button>
 
         <br/>
 
@@ -91,21 +86,6 @@ const CadastroBeneficiarioPage = () => {
           onChangeText={text => setNome(text)}
         />
 
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Apelido"
-          value={apelido}
-          onChangeText={text => setApelido(text)}
-        />
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="RG"
-          value={rg}
-          onChangeText={text => setRg(text)}
-        />
 
         <TextInput
           style={styles.input}
@@ -118,9 +98,17 @@ const CadastroBeneficiarioPage = () => {
         <TextInput
           style={styles.input}
           mode="outlined"
-          label="Telefone"
-          value={telefone}
-          onChangeText={text => setTelefone(text)}
+          label="email"
+          value={email}
+          onChangeText={text => setEmail(text)}
+        />
+
+        <TextInput
+          style={styles.input}
+          mode="outlined"
+          label="password"
+          value={password}
+          onChangeText={text => setPassword(text)}
         />
 
         <TextInput
@@ -156,14 +144,6 @@ const CadastroBeneficiarioPage = () => {
           onChangeText={text => setCidade(text)}
         />
 
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Foto"
-          value={foto}
-          onChangeText={text => setFoto(text)}
-        />
-
         <div style={{ display: "flex", 
           justifyContent: "center", 
           alignItems: "center" }}>
@@ -175,12 +155,6 @@ const CadastroBeneficiarioPage = () => {
             Cadastrar
           </Button>
         </div>
-
-        <FAB
-        icon="plus"
-        style={styles.fab}
-        onPress={() => navigation.navigate('cadastroDependentes')}
-        />
 
       </Body>
     </Container>
@@ -204,4 +178,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CadastroBeneficiarioPage;
+export default CadastroVoluntarioPage;

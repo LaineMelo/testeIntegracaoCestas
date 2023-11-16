@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, Alert} from 'react-native';
-import {TextInput, Button} from 'react-native-paper';
+import {TextInput, Button, Text, View} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 
 import Container from '../../components/Container';
@@ -8,8 +8,8 @@ import Header from '../../components/Header';
 import Body from '../../components/Body';
 
 const LoginPage = () => {
-  const [login, setLogin] = React.useState('');
-  const [senha, setSenha] = React.useState('');
+  const [login, setLogin] = useState('');
+  const [senha, setSenha] = useState('');
   const navigation = useNavigation();
 
   const efetuarLogin = () => {
@@ -18,12 +18,18 @@ const LoginPage = () => {
     } else {
       navigation.navigate('home');
     }
-  }
+  };
   
   return(
    <Container>
     <Header title={'Cestas Aracaju'} />
       <Body>
+
+      <Text 
+        style={styles.title}
+        variant="displayLarge">
+        Login
+      </Text>
 
         <TextInput
           style={styles.input}
@@ -41,12 +47,16 @@ const LoginPage = () => {
           right={<TextInput.Icon icon="eye" />}
         />
 
-        <Button 
-        icon="login" 
-        mode="contained" 
-        onPress={(efetuarLogin)}>
-          Entrar 
-        </Button>
+        <View style={{ display: "flex", 
+          justifyContent: "center", 
+          alignItems: "center" }} >
+          <Button
+          icon="login"
+          mode="contained"
+          onPress={(efetuarLogin)}>
+            Entrar
+          </Button>
+        </View>
 
       </Body>
     </Container>
@@ -56,7 +66,16 @@ const LoginPage = () => {
 const styles = StyleSheet.create({
   input:{
     backgroundColor:'#FFF',
-    marginBottom:20,
+    marginBottom:20
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 40,
+    marginBottom:40
+  },
+  button: {
+    width: 150,
+    backgroundColor:'#787878',
   }
 });
 
