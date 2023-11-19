@@ -90,8 +90,10 @@ const VoluntarioPage = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Pesquisar Beneficiário</Text>
+      <Text style={styles.title}>Pesquisar Voluntário</Text>
       <TextInput
+      style={{marginBottom:10,
+              marginTop:10}}
         label="Nome do Voluntário"
         value={searchText}
         onChangeText={(text) => setSearchText(text)}
@@ -137,14 +139,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    marginTop:50,
     marginBottom: 16,
     textAlign: 'center',
   },
   fab: {
     position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
+    top:270,
+    right: 20,
+
   },
 });
 

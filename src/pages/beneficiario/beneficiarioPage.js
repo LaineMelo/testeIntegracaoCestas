@@ -29,8 +29,6 @@ const BeneficiarioPage = () => {
     // Lógica para buscar beneficiários com base no nome
     setLoading(true);
     setError(null);
-
-
     const fetchData = async () => {
       try {
         const response = await fetch(`https://localhost:7164/api/Beneficiarios?nome=${searchText}`);
@@ -45,8 +43,6 @@ const BeneficiarioPage = () => {
         console.error('Erro ao buscar beneficiários:', error);
       }
     };
-
-
     fetchData();
   }, [searchText]);
 
@@ -68,8 +64,6 @@ const BeneficiarioPage = () => {
   const handleCloseModalLista = () => {
     setVisibleModal(false);
   };
-
-  
 
   const handleAdicionarCesta = async (idBeneficiario) => {
 
@@ -205,13 +199,17 @@ const BeneficiarioPage = () => {
   return (
 
     <View style={styles.container}>
-      <Text style={styles.title}>Pesquisar Beneficiário</Text>
+      <Text
+       style={styles.title}>Pesquisar Beneficiário</Text>
       <TextInput
+        style={{marginBottom:10,
+        marginTop:10}}
         label="Nome do Beneficiário"
         value={searchText}
         onChangeText={(text) => setSearchText(text)}
       />
-      <SearchButton onPress={handleSearch} />
+      <SearchButton
+       onPress={handleSearch} />
 
       <FlatList
         data={searchResults}
@@ -291,8 +289,6 @@ const BeneficiarioPage = () => {
         )}
       />
 
-
-
       <FAB
         icon="plus"
         style={styles.fab}
@@ -308,14 +304,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    marginTop:50,
     marginBottom: 16,
     textAlign: 'center',
   },
   fab: {
     position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
+    top:270,
+    right: 20,
+
   },
 });
 

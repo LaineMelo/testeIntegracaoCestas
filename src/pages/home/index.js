@@ -1,5 +1,5 @@
-import {Button, Divider, Text, View} from 'react-native-paper';
-import {StyleSheet} from 'react-native';
+import {Button, Divider, Text} from 'react-native-paper';
+import {StyleSheet, View} from 'react-native';
 import { Avatar } from 'react-native-paper';
 
 import Container from '../../components/Container';
@@ -18,71 +18,70 @@ const HomePage = () => {
 
     return(
       <Container>
-        <Header title={'Home'} />
+        <Header title={'Cestas Aracaju'} />
         <Body>
 
         <Text 
           style={styles.title}
           variant="displayLarge">
-          Home
+          Início
         </Text>
 
         <Divider /> 
    
 
-        <View style={{ display: "flex", 
+        <View style={{ display: "flex",
             justifyContent: "center", 
-            alignItems: "center" }}>
+            alignItems: "center",
+             padding: 20}}>
           <Avatar.Icon size={50} icon="account" />
         </View>
 
-    
-        <Divider />
-       
 
-        <View style={{ display: "flex", 
+        <View style={{ display: "flex",
             justifyContent: "center", 
             alignItems: "center" }}>
           <Button
           style={styles.button}
-          mode="contained"
+          mode="contained-tonal"
           onPress={() => navigation.navigate('beneficiario')}>
              Beneficiários
           </Button>
         </View>
         
-        <View style={{ display: "flex", 
+        <View style={{ display: "flex",
             justifyContent: "center", 
             alignItems: "center" }}>
           <Button
           style={styles.button}
-          mode="contained"
+          mode="contained-tonal"
           onPress={() => navigation.navigate('registroCesta')}>
             Cestas
           </Button>
         </View>
 
-        <View style={{ display: "flex", 
+        <View style={{ display: "flex",
            justifyContent: "center", 
            alignItems: "center" }}>
           <Button
           style={styles.button}
-          mode="contained"
+          mode="contained-tonal"
           onPress={() => navigation.navigate('necessidades')}>
            Lista Necessidades
           </Button>
         </View>
 
-        <View style={{ display: "flex", 
+        <View style={{ display: "flex",
           justifyContent: "center", 
           alignItems: "center" }}>
           <Button
           style={styles.button}
-          mode="contained"
+          mode="contained-tonal"
           onPress={() => navigation.navigate('voluntario')}>
             Voluntários
           </Button>
         </View>
+
 
         </Body>      
       </Container>
@@ -98,8 +97,8 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 250,
-    backgroundColor:'#787878',
-    marginBottom:8
+    //backgroundColor:'#787878',
+    marginBottom:8,
   }
 });
 

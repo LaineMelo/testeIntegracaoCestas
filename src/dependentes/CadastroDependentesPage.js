@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Button} from 'react-native-paper';
-import {StyleSheet} from 'react-native';
-import { TextInput, Text, Divider } from 'react-native-paper';
+import {StyleSheet, Text, View} from 'react-native';
+import { TextInput, Divider } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
 
 import Container from '../components/Container';
@@ -9,7 +9,7 @@ import Body from '../components/Body';
 
 import { useNavigation } from '@react-navigation/native';
 
-const CadastoDependentesPage = () => {
+const CadastroDependentesPage = () => {
 
     const navigation = useNavigation();
 
@@ -56,11 +56,6 @@ const CadastoDependentesPage = () => {
           Cadastrar Dependentes
         </Text>
 
-        <br/>
-
-        <button className="btn btn-light btn-sm" onClick={() => navigation.navigate('beneficiario')}>Voltar</button>
-
-        <br/>
 
         <TextInput
           style={styles.input}
@@ -86,7 +81,7 @@ const CadastoDependentesPage = () => {
           onChangeText={text => setParentesco(text)}
         />
 
-        <div style={{ display: "flex", 
+        <View style={{ display: "flex",
           justifyContent: "center", 
           alignItems: "center" }}>
           <Button 
@@ -96,7 +91,7 @@ const CadastoDependentesPage = () => {
           onPress={handleCadastroDependente}>
             Cadastrar
           </Button>
-        </div>
+        </View>
 
         </Body>      
       </Container>
@@ -111,13 +106,14 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 25,
-    marginBottom:20
+    marginBottom:20,
+    marginTop:50
   },
   button: {
     width: 200,
-    backgroundColor:'#787878',
+    //backgroundColor:'#787878',
     marginBottom:8
   }
 });
 
-export default CadastoDependentesPage;
+export default CadastroDependentesPage;

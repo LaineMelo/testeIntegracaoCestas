@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
-import { TextInput, Text, Divider } from 'react-native-paper';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { TextInput,Text, Divider } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
 
 import Container from '../../components/Container';
@@ -57,27 +57,22 @@ const CadastroVoluntarioPage = () => {
 
   return (
     <Container>
-      <Header title={'Voluntario'} />
+      <Header title={'Cadastrar Perfil'} />
       <Body>
 
       <Text
           style={styles.title}
           variant="displayLarge">
-          Cadastrar Voluntário
+          Voluntário
         </Text>
 
-        <div style={{ display: "flex", 
+        <View style={{ display: "flex",
             justifyContent: "center", 
             alignItems: "center" }}>
           <Avatar.Icon size={50} icon="account" />
-        </div>
+        </View>
 
-        <br/>
-
-        <button className="btn btn-light btn-sm" onClick={() => navigation.navigate('home')}>Voltar</button>
-
-        <br/>
-
+        <ScrollView>
         <TextInput
           style={styles.input}
           mode="outlined"
@@ -144,7 +139,7 @@ const CadastroVoluntarioPage = () => {
           onChangeText={text => setCidade(text)}
         />
 
-        <div style={{ display: "flex", 
+        <View style={{ display: "flex",
           justifyContent: "center", 
           alignItems: "center" }}>
           <Button
@@ -154,8 +149,8 @@ const CadastroVoluntarioPage = () => {
             onPress={handleCadastro}>
             Cadastrar
           </Button>
-        </div>
-
+        </View>
+        </ScrollView>
       </Body>
     </Container>
   );
@@ -173,7 +168,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 200,
-    backgroundColor: '#787878',
+   // backgroundColor: '#787878',
     marginBottom: 8
   }
 });

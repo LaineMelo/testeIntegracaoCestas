@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { TextInput, Text, Divider } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
 import { FAB } from 'react-native-paper';
@@ -62,27 +62,25 @@ const CadastroBeneficiarioPage = () => {
 
   return (
     <Container>
-      <Header title={'Beneficiario'} />
+      <Text>
+      <Header title={'Cadastrar Perfil'} />
+      </Text>
       <Body>
 
       <Text
           style={styles.title}
           variant="displayLarge">
-          Cadastrar Beneficiário
+          Beneficiário
         </Text>
 
-        <div style={{ display: "flex", 
+        <View style={{ display: "flex",
             justifyContent: "center", 
             alignItems: "center" }}>
           <Avatar.Icon size={50} icon="account" />
-        </div>
+        </View>
 
-        <br/>
 
-        <button className="btn btn-light btn-sm" onClick={() => navigation.navigate('beneficiario')}>Voltar</button>
-
-        <br/>
-
+        <ScrollView>
         <TextInput
           style={styles.input}
           mode="outlined"
@@ -164,7 +162,7 @@ const CadastroBeneficiarioPage = () => {
           onChangeText={text => setFoto(text)}
         />
 
-        <div style={{ display: "flex", 
+        <View style={{ display: "flex",
           justifyContent: "center", 
           alignItems: "center" }}>
           <Button
@@ -174,13 +172,10 @@ const CadastroBeneficiarioPage = () => {
             onPress={handleCadastro}>
             Cadastrar
           </Button>
-        </div>
+        </View>
 
-        <FAB
-        icon="plus"
-        style={styles.fab}
-        onPress={() => navigation.navigate('cadastroDependentes')}
-        />
+
+        </ScrollView>
 
       </Body>
     </Container>
@@ -199,9 +194,17 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 200,
-    backgroundColor: '#787878',
-    marginBottom: 8
-  }
+    //backgroundColor: '#787878',
+    margin: 15
+  },
+    fab: {
+      position: 'fixed',
+      bottom:0,
+      width:60,
+      left: 320,
+      marginBottom:20,
+
+    }
 });
 
 export default CadastroBeneficiarioPage;

@@ -3,7 +3,7 @@ import {StyleSheet, Alert} from 'react-native';
 import {TextInput, Button, Text, View} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 
-import Container from '../../components/Container';
+import Container from '../../components/Container.js';
 import Header from '../../components/Header';
 import Body from '../../components/Body';
 
@@ -47,16 +47,13 @@ const LoginPage = () => {
           right={<TextInput.Icon icon="eye" />}
         />
 
-        <View style={{ display: "flex", 
-          justifyContent: "center", 
-          alignItems: "center" }} >
+
           <Button
           icon="login"
           mode="contained"
           onPress={(efetuarLogin)}>
             Entrar
           </Button>
-        </View>
 
       </Body>
     </Container>

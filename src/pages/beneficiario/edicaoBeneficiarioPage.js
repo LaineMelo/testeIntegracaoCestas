@@ -1,6 +1,6 @@
 // EditScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 
 const EditScreen = ({ route, navigation }) => {
@@ -56,7 +56,7 @@ const EditScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>Editar Beneficiário</Text>
       <TextInput
         label="Nome"
@@ -113,7 +113,10 @@ const EditScreen = ({ route, navigation }) => {
       <Button icon="content-save" mode="contained" onPress={handleSaveChanges}>
         Salvar Alterações
       </Button>
-    </View>
+
+
+
+    </ScrollView>
   );
 };
 
