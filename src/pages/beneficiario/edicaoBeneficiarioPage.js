@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 
+import Header from '../../components/Header';
+import BackButton from '../../components/BackButton';
+import Body from '../../components/Body';
+
 const EditScreen = ({ route, navigation }) => {
   const { beneficiarioId } = route.params;
   const [beneficiario, setBeneficiario] = useState({
@@ -17,7 +21,6 @@ const EditScreen = ({ route, navigation }) => {
     cidade: '',
     foto: '', 
     
-    // Adicione outras propriedades do beneficiário conforme necessário
   });
 
   useEffect(() => {
@@ -55,68 +58,72 @@ const EditScreen = ({ route, navigation }) => {
     }
   };
 
-  return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Editar Beneficiário</Text>
-      <TextInput
-        label="Nome"
-        value={beneficiario.nome}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, nome: text })}
-      />
-      <TextInput
-        label="Apelido"
-        value={beneficiario.apelido}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, apelido: text })}
-      />
-      <TextInput
-        label="RG"
-        value={beneficiario.rg}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, rg: text })}
-      />
-      <TextInput
-        label="CPF"
-        value={beneficiario.cpf}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, cpf: text })}
-      />
-      <TextInput
-        label="Telefone"
-        value={beneficiario.telefone}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, telefone: text })}
-      />
-      <TextInput
-        label="Logradouro"
-        value={beneficiario.logradouro}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, logradouro: text })}
-      />
-      <TextInput
-        label="Bairro"
-        value={beneficiario.bairro}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, bairro: text })}
-      />
-      <TextInput
-        label="Número"
-        value={beneficiario.numero}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, numero: text })}
-      />
-      <TextInput
-        label="Cidade"
-        value={beneficiario.cidade}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, cidade: text })}
-      />
-      <TextInput
-        label="Foto"
-        value={beneficiario.foto}
-        onChangeText={(text) => setBeneficiario({ ...beneficiario, foto: text })}
-      />
+  return (   
+    <Body>
+      <Header/>
+      <BackButton/>
+      <ScrollView style={styles.container}>
+        
+        <Text style={styles.title}>Editar Beneficiário</Text>
+        <TextInput
+          label="Nome"
+          value={beneficiario.nome}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, nome: text })}
+        />
+        <TextInput
+          label="Apelido"
+          value={beneficiario.apelido}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, apelido: text })}
+        />
+        <TextInput
+          label="RG"
+          value={beneficiario.rg}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, rg: text })}
+        />
+        <TextInput
+          label="CPF"
+          value={beneficiario.cpf}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, cpf: text })}
+        />
+        <TextInput
+          label="Telefone"
+          value={beneficiario.telefone}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, telefone: text })}
+        />
+        <TextInput
+          label="Logradouro"
+          value={beneficiario.logradouro}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, logradouro: text })}
+        />
+        <TextInput
+          label="Bairro"
+          value={beneficiario.bairro}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, bairro: text })}
+        />
+        <TextInput
+          label="Número"
+          value={beneficiario.numero}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, numero: text })}
+        />
+        <TextInput
+          label="Cidade"
+          value={beneficiario.cidade}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, cidade: text })}
+        />
+        <TextInput
+          label="Foto"
+          value={beneficiario.foto}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, foto: text })}
+        />
       
-
-      <Button icon="content-save" mode="contained" onPress={handleSaveChanges}>
-        Salvar Alterações
-      </Button>
-
-
-
-    </ScrollView>
+        <Button icon="content-save" mode="contained"
+        style={{marginTop:15,
+          marginBottom:15}}
+        onPress={handleSaveChanges}>
+          Salvar Alterações
+        </Button>
+      </ScrollView>
+    </Body>
   );
 };
 

@@ -1,34 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import {Button} from 'react-native-paper';
-import {StyleSheet} from 'react-native';
+import { Button } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
 
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Body from '../../components/Body';
 
+import BackButton from '../../components/BackButton';
+
 const RegistroCestaPage = () => {
 
-  const [beneficiario, setBeneficiario] = React.useState("");
-  const [voluntario, setVoluntario] = React.useState("");
-  const [quantidade, setQuantidade] = React.useState("");
-  const [observacao, setObservacao] = React.useState("");
+  const [idBeneficiario, setIdBeneficiario] = useState("");
+  const [idVoluntario, setIdVoluntario] = useState("");
+  const [quantidadeCesta, setQuantidadeCesta] = useState("");
+  const [dataEntrega, setDataEntrega] = useState("");
+  const [dataAtual, setDataAtual] = useState('');
 
   const handleRegistro = async () => {
     try {
-      // Configurar os dados que você deseja enviar para a API
+
+      const dataAtual = new Date();
+      // Formatar a data e hora no formato ISO 8601
+      const dataEntrega = dataAtual.toISOString();
+
       const data = {
-        beneficiario,
-        voluntario,
-        quantidade,
-        observacao,
+        idBeneficiario,
+        idVoluntario: 0,
+        quantidadeCesta,
+        dataEntrega: dataAtual,
       };
 
       // Fazer uma solicitação POST para a API com os dados do formulário
       const response = await axios.post('https://localhost:7164/api/RegistroCesta'
-      , data);
+        , data);
 
       // Aqui, você pode lidar com a resposta da API conforme necessário
       console.log('Resposta da API:', response.data);
@@ -38,80 +45,102 @@ const RegistroCestaPage = () => {
     }
   };
 
-    return(
-      <Container>
-        <Header title={'Entrega de Cesta'} />
-        <Body>
+  useEffect(() => {
+    // Obter a data e hora atuais
+    const dataHoraAtual = new Date();
+    // Formatar a data e hora no formato desejado
+    const formatoDataHora = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZoneName: 'short',
+    };
+    const dataHoraFormatada = dataHoraAtual.toLocaleString(undefined, formatoDataHora);
 
-        <Text 
+    // Definir a data formatada no estado
+    setDataAtual(dataHoraFormatada);
+  }, []);
+
+  return (
+    
+<Body>
+      <Header />
+       <BackButton />
+
+        <Text
           style={styles.title}
           variant="displayLarge">
-          Cesta
+          Registro Cestas
         </Text>
 
         <TextInput
           style={styles.input}
           mode="outlined"
           label="Beneficiário"
-          value={beneficiario}
-          onChangeText={text => setBeneficiario(text)}
+          value={idBeneficiario}
+          onChangeText={text => setIdBeneficiario(text)}
         />
 
         <TextInput
           style={styles.input}
           mode="outlined"
           label="Voluntário"
-          value={voluntario}
-          onChangeText={text => setVoluntario(text)}
+          value={idVoluntario}
+          editable={false}
         />
 
         <TextInput
           style={styles.input}
           mode="outlined"
           label="Quantidade"
-          value={quantidade}
-          onChangeText={text => setQuantidade(text)}
+          value={quantidadeCesta}
+          onChangeText={text => setQuantidadeCesta(text)}
         />
 
         <TextInput
           style={styles.input}
           mode="outlined"
-          label="Observação"
-          value={observacao}
-          onChangeText={text => setObservacao(text)}
+          label={`Data: ${dataAtual}`}
+          value={dataEntrega}
+          editable={false}
         />
 
-        <div style={{ display: "flex", 
-          justifyContent: "center", 
-          alignItems: "center" }}>
+        <View style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
           <Button
-          style={styles.button}
-          icon="content-save"
-          mode="contained"
-          onPress={handleRegistro}>
+            style={styles.button}
+            icon="content-save"
+            mode="contained"
+            onPress={handleRegistro}>
             Registrar
           </Button>
-        </div>
+        </View>
 
-        </Body>      
-      </Container>
-    );
+      </Body>
+    
+  );
 
 }
 
 const styles = StyleSheet.create({
-  input:{
-    marginBottom:10,
+  input: {
+    marginBottom: 10,
   },
   title: {
     textAlign: 'center',
     fontSize: 25,
-    marginBottom:20
+    marginBottom: 10
   },
   button: {
     width: 200,
-    backgroundColor:'#787878',
-    marginBottom:8
+    // backgroundColor:'#787878',
+    marginBottom: 8
   }
 });
 

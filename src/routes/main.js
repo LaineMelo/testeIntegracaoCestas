@@ -10,7 +10,7 @@ import CadastroNecessidadesBeneficiarioPage from '../pages/necessidades/cadastro
 import VoluntarioPage from '../pages/voluntarios/voluntarioPage';
 import CadastroVoluntarioPage from '../pages/voluntarios/cadastroVoluntarioPage';
 import EdicaoVoluntarioPage from '../pages/voluntarios/edicaoVoluntarioPage';
-import CadastoDependentesPage from '../dependentes/CadastroDependentesPage';
+import CadastoDependentesPage from '../pages/dependentes/CadastroDependentesPage';
 import edicaoBeneficiarioPage from '../pages/beneficiario/edicaoBeneficiarioPage';
 
 const Stack = createNativeStackNavigator();

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 
+import BackButton from '../../components/BackButton';
+
+import Header from '../../components/Header';
+import Body from '../../components/Body';
 const EditScreen = ({ route, navigation }) => {
   const { voluntarioId } = route.params;
   const [voluntario, setVoluntario] = useState({
@@ -53,54 +57,62 @@ const EditScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Editar Voluntário</Text>
-      <TextInput
-        label="Nome"
-        value={voluntario.nome}
-        onChangeText={(text) => setVoluntario({ ...voluntario, nome: text })}
-      />
-      <TextInput
-        label="CPF"
-        value={voluntario.cpf}
-        onChangeText={(text) => setVoluntario({ ...voluntario, cpf: text })}
-      />
-      <TextInput
-        label="Email"
-        value={voluntario.email}
-        onChangeText={(text) => setVoluntario({ ...voluntario, email: text })}
-      />
-      <TextInput
-        label="Password"
-        value={voluntario.password}
-        onChangeText={(text) => setVoluntario({ ...voluntario, password: text })}
-      />
-      <TextInput
-        label="Logradouro"
-        value={voluntario.logradouro}
-        onChangeText={(text) => setVoluntario({ ...voluntario, logradouro: text })}
-      />
-      <TextInput
-        label="Bairro"
-        value={voluntario.bairro}
-        onChangeText={(text) => setVoluntario({ ...voluntario, bairro: text })}
-      />
-      <TextInput
-        label="Número"
-        value={voluntario.numero}
-        onChangeText={(text) => setVoluntario({ ...voluntario, numero: text })}
-      />
-      <TextInput
-        label="Cidade"
-        value={voluntario.cidade}
-        onChangeText={(text) => setVoluntario({ ...voluntario, cidade: text })}
-      />
+    <Body>
       
-
-      <Button icon="content-save" mode="contained" onPress={handleSaveChanges}>
-        Salvar Alterações
-      </Button>
-    </View>
+      <Header/>
+      
+      <BackButton/>
+      
+      <ScrollView>
+        <Text style={styles.title}>Editar Voluntário</Text>
+        <TextInput
+          label="Nome"
+          value={voluntario.nome}
+          onChangeText={(text) => setVoluntario({ ...voluntario, nome: text })}
+        />
+        <TextInput
+          label="CPF"
+          value={voluntario.cpf}
+          onChangeText={(text) => setVoluntario({ ...voluntario, cpf: text })}
+        />
+        <TextInput
+          label="Email"
+          value={voluntario.email}
+          onChangeText={(text) => setVoluntario({ ...voluntario, email: text })}
+        />
+        <TextInput
+          label="Password"
+          value={voluntario.password}
+          onChangeText={(text) => setVoluntario({ ...voluntario, password: text })}
+        />
+        <TextInput
+          label="Logradouro"
+          value={voluntario.logradouro}
+          onChangeText={(text) => setVoluntario({ ...voluntario, logradouro: text })}
+        />
+        <TextInput
+          label="Bairro"
+          value={voluntario.bairro}
+          onChangeText={(text) => setVoluntario({ ...voluntario, bairro: text })}
+        />
+        <TextInput
+          label="Número"
+          value={voluntario.numero}
+          onChangeText={(text) => setVoluntario({ ...voluntario, numero: text })}
+        />
+        <TextInput
+          label="Cidade"
+          value={voluntario.cidade}
+          onChangeText={(text) => setVoluntario({ ...voluntario, cidade: text })}
+        />
+        <Button icon="content-save" mode="contained"
+        style={{marginTop:15,
+        marginBottom:15}}
+        onPress={handleSaveChanges}>
+          Salvar Alterações
+        </Button>
+      </ScrollView>
+    </Body>
   );
 };
 

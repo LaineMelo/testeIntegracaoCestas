@@ -3,6 +3,11 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import { TextInput, Button, Text, Card, FAB } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
+import BackButton from '../../components/BackButton';
+
+import Header from '../../components/Header';
+import Body from '../../components/Body';
+
 const VoluntarioPage = () => {
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState('');
@@ -32,29 +37,29 @@ const VoluntarioPage = () => {
         console.error('Erro ao buscar voluntários:', error);
       }
     };
-    
+
 
     fetchData();
   }, [searchText]);
 
   const handleSearch = () => {
     console.log('Botão de pesquisa pressionado');
-      // Altere a consulta para pesquisar por nome
-      const fetchData = async () => {
-        const response = await fetch(`https://localhost:7164/api/Voluntario?nome.like=${searchText}`);
-  
-        if (!response.ok) {
-          console.error('Erro na solicitação:', response.status);
-          return;
-        }
-  
-        const data = await response.json();
-        setSearchResults(data);
-      };
-  
-      fetchData();
+    // Altere a consulta para pesquisar por nome
+    const fetchData = async () => {
+      const response = await fetch(`https://localhost:7164/api/Voluntario?nome.like=${searchText}`);
+
+      if (!response.ok) {
+        console.error('Erro na solicitação:', response.status);
+        return;
+      }
+
+      const data = await response.json();
+      setSearchResults(data);
     };
-  
+
+    fetchData();
+  };
+
 
   const handleNavigateToEdit = (voluntarioId) => {
     // Use o operador for para iterar sobre a lista de resultados
@@ -89,16 +94,27 @@ const VoluntarioPage = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <Body>
+
+      <Header/>
+      <BackButton/>
+
       <Text style={styles.title}>Pesquisar Voluntário</Text>
       <TextInput
-      style={{marginBottom:10,
-              marginTop:10}}
+        style={{
+          margin: 15,
+        }}
         label="Nome do Voluntário"
         value={searchText}
         onChangeText={(text) => setSearchText(text)}
       />
-      <Button icon="card-search-outline" mode="contained" onPress={handleSearch}>
+      <Button icon="card-search-outline" mode="contained"
+      style={{
+        marginRight:20,
+        marginLeft:20,
+        marginBottom:10,
+      }}
+      onPress={handleSearch}>
         Pesquisar
       </Button>
 
@@ -106,8 +122,11 @@ const VoluntarioPage = () => {
         data={searchResults}
         keyExtractor={(item) => item.voluntarioId || (item.id ? item.id.toString() : '')}
         renderItem={({ item }) => (
-          
-          <Card>
+
+          <Card
+          style={{
+            margin:15,
+          }}>
             <Card.Content>
               <Text variant="bodyMedium">Nome: {item.nome}</Text>
               <Text variant="bodyMedium">CPF: {item.cpf}</Text>
@@ -129,23 +148,21 @@ const VoluntarioPage = () => {
         style={styles.fab}
         onPress={() => navigation.navigate('cadastroVoluntario')}
       />
-    </View>
+    </Body>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
+  
   title: {
     fontSize: 24,
-    marginTop:50,
-    marginBottom: 16,
+    marginTop: 10,
+    marginBottom: 5,
     textAlign: 'center',
   },
   fab: {
     position: 'absolute',
-    top:270,
+    bottom: 10,
     right: 20,
 
   },

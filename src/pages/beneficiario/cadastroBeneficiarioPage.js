@@ -9,6 +9,8 @@ import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Body from '../../components/Body';
 
+import BackButton from '../../components/BackButton';
+
 import { useNavigation } from '@react-navigation/native';
 
 const CadastroBeneficiarioPage = () => {
@@ -49,6 +51,10 @@ const CadastroBeneficiarioPage = () => {
           }),
         });
 
+        {/*
+        const beneficiarioData = await responseBeneficiario.json();
+        const beneficiarioId = beneficiarioData.id;*/}
+
       if (response.ok) {
         console.log('Beneficiário registrado com sucesso!');
       } else {
@@ -61,12 +67,9 @@ const CadastroBeneficiarioPage = () => {
   };
 
   return (
-    <Container>
-      <Text>
-      <Header title={'Cadastrar Perfil'} />
-      </Text>
-      <Body>
-
+    <Body>
+      <Header/>
+      <BackButton/>
       <Text
           style={styles.title}
           variant="displayLarge">
@@ -75,7 +78,8 @@ const CadastroBeneficiarioPage = () => {
 
         <View style={{ display: "flex",
             justifyContent: "center", 
-            alignItems: "center" }}>
+            alignItems: "center",
+            marginBottom: 10 }}>
           <Avatar.Icon size={50} icon="account" />
         </View>
 
@@ -178,7 +182,7 @@ const CadastroBeneficiarioPage = () => {
         </ScrollView>
 
       </Body>
-    </Container>
+    
   );
 
 }
@@ -190,21 +194,14 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 25,
-    marginBottom: 20
+    marginBottom: 5
   },
   button: {
     width: 200,
     //backgroundColor: '#787878',
-    margin: 15
+    marginBottom: 15
   },
-    fab: {
-      position: 'fixed',
-      bottom:0,
-      width:60,
-      left: 320,
-      marginBottom:20,
-
-    }
+    
 });
 
 export default CadastroBeneficiarioPage;

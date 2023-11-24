@@ -4,8 +4,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import { TextInput, Divider } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
 
-import Container from '../components/Container';
-import Body from '../components/Body';
+import Container from '../../components/Container';
+import Body from '../../components/Body';
 
 import { useNavigation } from '@react-navigation/native';
 

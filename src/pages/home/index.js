@@ -18,9 +18,8 @@ const HomePage = () => {
 
     return(
       <Container>
-        <Header title={'Cestas Aracaju'} />
         <Body>
-
+        <Header title={'Cestas Aracaju'} />
         <Text 
           style={styles.title}
           variant="displayLarge">
@@ -56,7 +55,7 @@ const HomePage = () => {
           style={styles.button}
           mode="contained-tonal"
           onPress={() => navigation.navigate('registroCesta')}>
-            Cestas
+            Registro Cestas
           </Button>
         </View>
 
@@ -93,10 +92,11 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 40,
-    marginBottom:40
+    marginBottom:15
   },
   button: {
     width: 250,
+    margin:20,
     //backgroundColor:'#787878',
     marginBottom:8,
   }

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { TextInput,Text, Divider } from 'react-native-paper';
+import { TextInput, Text, Divider } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
 
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Body from '../../components/Body';
+
+import BackButton from '../../components/BackButton';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -56,103 +58,109 @@ const CadastroVoluntarioPage = () => {
   };
 
   return (
-    <Container>
+    
+<Body>
       <Header title={'Cadastrar Perfil'} />
-      <Body>
+      <BackButton />
 
-      <Text
+        <Text
           style={styles.title}
           variant="displayLarge">
           Voluntário
         </Text>
 
-        <View style={{ display: "flex",
-            justifyContent: "center", 
-            alignItems: "center" }}>
+        <View style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: 10 
+        }}>
           <Avatar.Icon size={50} icon="account" />
         </View>
 
         <ScrollView>
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Nome"
-          value={nome}
-          onChangeText={text => setNome(text)}
-        />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Nome"
+            value={nome}
+            onChangeText={text => setNome(text)}
+          />
 
 
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="CPF"
-          value={cpf}
-          onChangeText={text => setCpf(text)}
-        />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="CPF"
+            value={cpf}
+            onChangeText={text => setCpf(text)}
+          />
 
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="email"
-          value={email}
-          onChangeText={text => setEmail(text)}
-        />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="email"
+            value={email}
+            onChangeText={text => setEmail(text)}
+          />
 
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="password"
-          value={password}
-          onChangeText={text => setPassword(text)}
-        />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="password"
+            value={password}
+            onChangeText={text => setPassword(text)}
+          />
 
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Logradouro"
-          value={logradouro}
-          onChangeText={text => setLogradouro(text)}
-        />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Logradouro"
+            value={logradouro}
+            onChangeText={text => setLogradouro(text)}
+          />
 
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Bairro"
-          value={bairro}
-          onChangeText={text => setBairro(text)}
-        />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Bairro"
+            value={bairro}
+            onChangeText={text => setBairro(text)}
+          />
 
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Número"
-          value={numero}
-          onChangeText={text => setNumero(text)}
-        />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Número"
+            value={numero}
+            onChangeText={text => setNumero(text)}
+          />
 
 
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Cidade"
-          value={cidade}
-          onChangeText={text => setCidade(text)}
-        />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Cidade"
+            value={cidade}
+            onChangeText={text => setCidade(text)}
+          />
 
-        <View style={{ display: "flex",
-          justifyContent: "center", 
-          alignItems: "center" }}>
-          <Button
-            style={styles.button}
-            icon="content-save"
-            mode="contained"
-            onPress={handleCadastro}>
-            Cadastrar
-          </Button>
-        </View>
+          <View style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}>
+            <Button
+              style={styles.button}
+              icon="content-save"
+              mode="contained"
+              onPress={handleCadastro}>
+              Cadastrar
+            </Button>
+          </View>
         </ScrollView>
       </Body>
-    </Container>
+    
   );
 
 }
@@ -164,12 +172,12 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 25,
-    marginBottom: 20
+    marginBottom: 5
   },
   button: {
     width: 200,
-   // backgroundColor: '#787878',
-    marginBottom: 8
+    // backgroundColor: '#787878',
+    marginBottom: 15
   }
 });
 

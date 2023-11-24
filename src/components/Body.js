@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
   container:{
       flex:1,
       backgroundColor:'#FFF',
-      margin: 8
+      margin: 8,
+      padding:5,
     },
 });
 

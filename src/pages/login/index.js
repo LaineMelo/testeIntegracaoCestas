@@ -22,7 +22,7 @@ const LoginPage = () => {
   
   return(
    <Container>
-    <Header title={'Cestas Aracaju'} />
+    <Header/>
       <Body>
 
       <Text 
