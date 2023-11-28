@@ -26,7 +26,7 @@ const VoluntarioPage = () => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://localhost:7164/api/Voluntario?nome=${searchText}`);
+        const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Voluntario?nome=${searchText}`);
         if (!response.ok) {
           console.error('Erro na solicitação:', response.status);
           return;
@@ -46,7 +46,7 @@ const VoluntarioPage = () => {
     console.log('Botão de pesquisa pressionado');
     // Altere a consulta para pesquisar por nome
     const fetchData = async () => {
-      const response = await fetch(`https://localhost:7164/api/Voluntario?nome.like=${searchText}`);
+      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Voluntario?nome.like=${searchText}`);
 
       if (!response.ok) {
         console.error('Erro na solicitação:', response.status);
@@ -76,7 +76,7 @@ const VoluntarioPage = () => {
 
   const handleDelete = async (voluntarioId) => {
     try {
-      const response = await fetch(`https://localhost:7164/api/Voluntario/${voluntarioId}`, {
+      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Voluntario/${voluntarioId}`, {
         method: 'DELETE',
       });
 
@@ -144,7 +144,7 @@ const VoluntarioPage = () => {
       />
 
       <FAB
-        icon="plus"
+        label='+ Cadastrar Voluntário'
         style={styles.fab}
         onPress={() => navigation.navigate('cadastroVoluntario')}
       />
@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
     right: 20,
+    fontWeight:700,
 
   },
 });

@@ -28,7 +28,7 @@ const CadastroVoluntarioPage = () => {
   const handleCadastro = async () => {
     try {
 
-      const response = await fetch('https://localhost:7164/api/Voluntario'
+      const response = await fetch('https://cestasgestor.azurewebsites.net/api/Voluntario'
         , {
           method: 'POST',
           headers: {

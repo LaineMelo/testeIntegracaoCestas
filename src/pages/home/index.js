@@ -47,6 +47,18 @@ const HomePage = () => {
              Beneficiários
           </Button>
         </View>
+
+        <View style={{ display: "flex",
+          justifyContent: "center", 
+          alignItems: "center" }}>
+          <Button
+          style={styles.button}
+          mode="contained-tonal"
+          onPress={() => navigation.navigate('cadastroDependentes')}>
+            Dependentes
+          </Button>
+        </View>
+
         
         <View style={{ display: "flex",
             justifyContent: "center", 

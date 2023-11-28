@@ -26,12 +26,12 @@ const CadastroBeneficiarioPage = () => {
   const [bairro, setBairro] = useState("");
   const [numero, setNumero] = useState("");
   const [cidade, setCidade] = useState("");
-  const [foto, setFoto] = useState("");
+  const [estado, setEstado] = useState("");
 
   const handleCadastro = async () => {
     try {
 
-      const response = await fetch('https://localhost:7164/api/Beneficiarios'
+      const response = await fetch('https://cestasgestor.azurewebsites.net/api/Beneficiarios'
         , {
           method: 'POST',
           headers: {
@@ -47,7 +47,7 @@ const CadastroBeneficiarioPage = () => {
             bairro,
             numero,
             cidade,
-            foto,
+            estado,
           }),
         });
 
@@ -161,9 +161,9 @@ const CadastroBeneficiarioPage = () => {
         <TextInput
           style={styles.input}
           mode="outlined"
-          label="Foto"
-          value={foto}
-          onChangeText={text => setFoto(text)}
+          label="Estado"
+          value={estado}
+          onChangeText={text => setEstado(text)}
         />
 
         <View style={{ display: "flex",

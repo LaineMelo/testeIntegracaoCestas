@@ -26,7 +26,7 @@ const CadastroNecessidadesBeneficiarioPage = ({ route }) => {
     }
 
     try {
-      const response = await axios.post('https://localhost:7164/api/ListaNecessidades', data);
+      const response = await axios.post('https://cestasgestor.azurewebsites.net/api/ListaNecessidades', data);
 
       setIdBeneficiario('');
       setListaNecessidades('');

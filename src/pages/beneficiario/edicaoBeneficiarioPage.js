@@ -27,7 +27,7 @@ const EditScreen = ({ route, navigation }) => {
     // Lógica para buscar os detalhes do beneficiário com base no ID
     // Isso simula uma chamada à API para buscar os detalhes do beneficiário
     const fetchData = async () => {
-      const response = await fetch(`https://localhost:7164/api/Beneficiarios/${beneficiarioId}`);
+      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`);
       const data = await response.json();
       setBeneficiario(data);
     };
@@ -38,7 +38,7 @@ const EditScreen = ({ route, navigation }) => {
   const handleSaveChanges = async () => {
     try {
       // Lógica para salvar as alterações do beneficiário
-      const response = await fetch(`https://localhost:7164/api/Beneficiarios/${beneficiarioId}`, {
+      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

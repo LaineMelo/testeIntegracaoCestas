@@ -24,7 +24,7 @@ const NecessidadesBeneficiarioPage = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get('https://localhost:7164/api/ListaNecessidades');
+          const response = await axios.get('https://cestasgestor.azurewebsites.net/api/ListaNecessidades');
           setListaNecessidades(response.data);
         } catch (error) {
           console.error('Erro ao buscar os dados:', error);
@@ -37,7 +37,7 @@ const NecessidadesBeneficiarioPage = () => {
 
     const handleDelete = async (id) => {
       try {
-        const response = await axios.delete(`https://localhost:7164/api/ListaNecessidades/${id}`);
+        const response = await axios.delete(`https://cestasgestor.azurewebsites.net/api/ListaNecessidades/${id}`);
         console.log(response.data);
         alert('Dados excluídos com sucesso!');
   

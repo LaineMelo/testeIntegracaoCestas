@@ -34,7 +34,7 @@ const RegistroCestaPage = () => {
       };
 
       // Fazer uma solicitação POST para a API com os dados do formulário
-      const response = await axios.post('https://localhost:7164/api/RegistroCesta'
+      const response = await axios.post('https://cestasgestor.azurewebsites.net/api/RegistroCesta'
         , data);
 
       // Aqui, você pode lidar com a resposta da API conforme necessário

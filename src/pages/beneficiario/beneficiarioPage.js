@@ -29,7 +29,7 @@ const BeneficiarioPage = () => {
     setError(null);
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://localhost:7164/api/Beneficiarios?nome=${searchText}`);
+        const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios?nome=${searchText}`);
         if (!response.ok) {
           console.error('Erro na solicitação:', response.status);
           return;
@@ -48,7 +48,7 @@ const BeneficiarioPage = () => {
     console.log('Botão de pesquisa pressionado');
     // Altere a consulta para pesquisar por nome
     const fetchData = async () => {
-      const response = await fetch(`https://localhost:7164/api/Beneficiarios?nome=${searchText}`);
+      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios?nome=${searchText}`);
 
       if (!response.ok) {
         console.error('Erro na solicitação:', response.status);
@@ -79,7 +79,7 @@ const BeneficiarioPage = () => {
 
   const handleDelete = async (beneficiarioId) => {
     try {
-      const response = await fetch(`https://localhost:7164/Beneficiarios/${beneficiarioId}`, {
+      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`, {
         method: 'DELETE',
       });
 
@@ -152,7 +152,7 @@ const BeneficiarioPage = () => {
        
       <View>
         <FAB
-          icon="plus"
+          label="+ Cadastrar Beneficiário"
           style={styles.fab}
           onPress={() => navigation.navigate('cadastroBeneficiario')}
         />
@@ -174,8 +174,9 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    bottom: 10,
+    bottom: 20,
     right: 20,
+    fontWeight:700
 
   },
 });
