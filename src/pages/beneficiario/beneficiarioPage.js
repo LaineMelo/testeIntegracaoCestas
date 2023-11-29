@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, StyleSheet, FlatList, Alert } from 'react-native';
 import { TextInput, Button, Text, Card, FAB } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
@@ -29,7 +29,7 @@ const BeneficiarioPage = () => {
     setError(null);
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios?nome=${searchText}`);
+        const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios?nome=${searchText}`,);
         if (!response.ok) {
           console.error('Erro na solicitação:', response.status);
           return;
@@ -84,12 +84,12 @@ const BeneficiarioPage = () => {
       });
 
       if (response.ok) {
-        console.log('Beneficiário excluído com sucesso!');
+        alert('Beneficiário excluído com sucesso!');
         // Atualizar a lista após excluir o beneficiário
         const updatedResults = searchResults.filter((item) => item.id !== beneficiarioId);
         setSearchResults(updatedResults);
       } else {
-        console.error('Erro ao excluir beneficiário:', response.status);
+        alert('Erro ao excluir beneficiário:', response.status);
       }
     } catch (error) {
       console.error('Erro ao excluir beneficiário:', error);
@@ -115,11 +115,11 @@ const BeneficiarioPage = () => {
         />
         <SearchButton
           onPress={handleSearch} />
-          
-        <ScrollView style={{
-          backgroundColor:"#FFFF"
-        }}>
+        
           <FlatList
+          style={{
+            backgroundColor:"#FFFF"
+          }}
             data={searchResults}
             keyExtractor={(item) => item.beneficiarioId || (item.id ? item.id.toString() : '')}
             renderItem={({ item }) => (
@@ -148,7 +148,7 @@ const BeneficiarioPage = () => {
               </Card>
             )}
           />
-        </ScrollView>
+        
        
       <View>
         <FAB
@@ -173,9 +173,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   fab: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
+    position: 'relative',
+    width:250,
+    marginTop:20,
+    bottom: 10,
+    left: 120,
     fontWeight:700
 
   },

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { TextInput, Text, Divider } from 'react-native-paper';
+import { StyleSheet, View, ScrollView, Alert } from 'react-native';
+import { TextInput, Text } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
-import { FAB } from 'react-native-paper';
+
 
 import Container from '../../components/Container';
 import Header from '../../components/Header';
@@ -49,16 +49,29 @@ const CadastroBeneficiarioPage = () => {
             cidade,
             estado,
           }),
+          
         });
+
+      setNome('');
+      setApelido('');
+      setRg('');
+      setCpf('');
+      setTelefone('');
+      setLogradouro('');
+      setBairro('');
+      setNumero('');
+      setCidade('');
+      setEstado('');
 
         {/*
         const beneficiarioData = await responseBeneficiario.json();
         const beneficiarioId = beneficiarioData.id;*/}
 
       if (response.ok) {
-        console.log('Beneficiário registrado com sucesso!');
+        Alert.alert('Salvo','Beneficiário registrado com sucesso!');
+        navigation.goBack();
       } else {
-        console.error('Erro ao registrar beneficiário!');
+        Alert.alert('Erro','Erro ao registrar beneficiário!');
 
       }
     } catch (error) {
@@ -84,102 +97,95 @@ const CadastroBeneficiarioPage = () => {
         </View>
 
 
+        
         <ScrollView>
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Nome"
-          value={nome}
-          onChangeText={text => setNome(text)}
-        />
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Apelido"
-          value={apelido}
-          onChangeText={text => setApelido(text)}
-        />
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="RG"
-          value={rg}
-          onChangeText={text => setRg(text)}
-        />
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="CPF"
-          value={cpf}
-          onChangeText={text => setCpf(text)}
-        />
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Telefone"
-          value={telefone}
-          onChangeText={text => setTelefone(text)}
-        />
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Logradouro"
-          value={logradouro}
-          onChangeText={text => setLogradouro(text)}
-        />
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Bairro"
-          value={bairro}
-          onChangeText={text => setBairro(text)}
-        />
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Número"
-          value={numero}
-          onChangeText={text => setNumero(text)}
-        />
-
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Cidade"
-          value={cidade}
-          onChangeText={text => setCidade(text)}
-        />
-
-        <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Estado"
-          value={estado}
-          onChangeText={text => setEstado(text)}
-        />
-
-        <View style={{ display: "flex",
-          justifyContent: "center", 
-          alignItems: "center" }}>
-          <Button
-            style={styles.button}
-            icon="content-save"
-            mode="contained"
-            onPress={handleCadastro}>
-            Cadastrar
-          </Button>
-        </View>
-
-
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Nome"
+            value={nome}
+            onChangeText={text => setNome(text)}
+          />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Apelido"
+            value={apelido}
+            onChangeText={text => setApelido(text)}
+          />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="RG"
+            value={rg}
+            onChangeText={text => setRg(text)}
+          />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="CPF"
+            value={cpf}
+            onChangeText={text => setCpf(text)}
+          />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Telefone"
+            value={telefone}
+            onChangeText={text => setTelefone(text)}
+          />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Logradouro"
+            value={logradouro}
+            onChangeText={text => setLogradouro(text)}
+          />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Bairro"
+            value={bairro}
+            onChangeText={text => setBairro(text)}
+          />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Número"
+            value={numero}
+            onChangeText={text => setNumero(text)}
+          />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Cidade"
+            value={cidade}
+            onChangeText={text => setCidade(text)}
+          />
+          <TextInput
+            style={styles.input}
+            mode="outlined"
+            label="Estado"
+            value={estado}
+            onChangeText={text => setEstado(text)}
+          />
+          
+          <View style={{ display: "flex",
+            justifyContent: "center",
+            alignItems: "center" }}>
+             
+            <Button
+              style={styles.button}
+              icon="content-save"
+              mode="contained"
+              onPress={handleCadastro}>
+              Cadastrar
+            </Button>
+          </View>
         </ScrollView>
+       
+
+        
 
       </Body>
     

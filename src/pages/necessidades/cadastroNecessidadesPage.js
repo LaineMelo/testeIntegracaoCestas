@@ -1,6 +1,6 @@
 import React, { useState, route } from 'react';
 import { Button } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
 import axios from 'axios';
 
@@ -31,12 +31,12 @@ const CadastroNecessidadesBeneficiarioPage = ({ route }) => {
       setIdBeneficiario('');
       setListaNecessidades('');
 
-
-      console.log(response.data);
-      alert('Dados salvos com sucesso!');
+      Alert.alert('Salvo','Dados salvos com sucesso!');
+      navigation.goBack();
+      
     } catch (error) {
-      console.log(error);
-      alert('Erro ao salvar os dados!');
+      Alert.alert(error);
+      alert('Erro','Erro ao salvar os dados!');
     }
   };
 

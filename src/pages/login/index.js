@@ -13,12 +13,17 @@ const LoginPage = () => {
   const navigation = useNavigation();
 
   const efetuarLogin = () => {
-    if(!login || !senha){
-      Alert.alert('Atenção','Informe o login e a senha.');
-    } else {
-      navigation.navigate('home');
-    }
-  };
+    const loginInformado = "admin"; // Login esperado
+  const senhaInformada = "admin"; // Senha esperada
+
+  if (!login || !senha) {
+    Alert.alert('Atenção', 'Informe o login e a senha.');
+  } else if (login === loginInformado && senha === senhaInformada) {
+    navigation.navigate('home');
+  } else {
+    Alert.alert('Erro', 'Login ou senha incorretos. Tente novamente.');
+  }
+};
   
   return(
    <Container>

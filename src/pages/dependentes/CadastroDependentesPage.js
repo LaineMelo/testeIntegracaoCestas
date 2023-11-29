@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
-import { TextInput, Divider } from 'react-native-paper';
+import { StyleSheet, Text, View, Alert } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
 import BackButton from '../../components/BackButton';
 
@@ -36,12 +36,20 @@ const CadastroDependentesPage = () => {
            
 
           }),
+
+
         });
 
+        setIdBeneficiario ('');
+        setNome('');
+        setParentesco('');
+        setCpf('');
+
       if (response.ok) {
-        console.log('Dependente registrado com sucesso!');
+        Alert.alert('Salvo','Dependente registrado com sucesso!');
+        navigation.goBack();
       } else {
-        console.error('Erro ao registrar dependente!');
+        Alert.alert('Erro','Erro ao registrar dependente!');
 
       }
     } catch (error) {

@@ -6,7 +6,7 @@ const Header = () => {
         <Appbar.Header>
           <Appbar.Content
           title='Sistema de Gerenciamento de Cestas'
-          titleStyle={{ fontSize: 16, fontWeight:'bold', textAlign:'center' }} />
+          titleStyle={{ fontSize: 16, fontWeight:'bold', textAlign:'center', padding: 0 }} />
       
       </Appbar.Header>
       

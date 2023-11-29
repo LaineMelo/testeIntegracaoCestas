@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { Button } from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
 
 import Container from '../../components/Container';
@@ -33,15 +33,20 @@ const RegistroCestaPage = () => {
         dataEntrega: dataAtual,
       };
 
+
       // Fazer uma solicitação POST para a API com os dados do formulário
       const response = await axios.post('https://cestasgestor.azurewebsites.net/api/RegistroCesta'
         , data);
 
+        setIdBeneficiario (''),
+        setQuantidadeCesta (''),
+
       // Aqui, você pode lidar com a resposta da API conforme necessário
-      console.log('Resposta da API:', response.data);
+      Alert.alert('Cesta registrada com sucesso!');
+      navigation.goBack();
     } catch (error) {
       // Lidar com erros, como falha na conexão ou resposta inválida
-      console.error('Erro ao fazer a solicitação para a API:', error);
+      Alert.alert('Erro ao fazer a solicitação para a API:', error);
     }
   };
 

@@ -161,10 +161,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   fab: {
-    position: 'absolute',
+    position: 'relative',
+    width:250,
+    marginTop:20,
     bottom: 10,
-    right: 20,
-    fontWeight:700,
+    left: 120,
+    fontWeight:700
 
   },
 });

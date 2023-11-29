@@ -1,7 +1,8 @@
 // EditScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
+import axios from 'axios';
 
 import Header from '../../components/Header';
 import BackButton from '../../components/BackButton';
@@ -19,17 +20,18 @@ const EditScreen = ({ route, navigation }) => {
     bairro: '',
     numero: '',
     cidade: '',
-    foto: '', 
+    estado: '', 
     
   });
 
   useEffect(() => {
-    // Lógica para buscar os detalhes do beneficiário com base no ID
-    // Isso simula uma chamada à API para buscar os detalhes do beneficiário
     const fetchData = async () => {
-      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`);
-      const data = await response.json();
-      setBeneficiario(data);
+      try {
+        const response = await axios.get(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`);
+        setBeneficiario(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar detalhes do beneficiário:', error);
+      }
     };
 
     fetchData();
@@ -37,34 +39,30 @@ const EditScreen = ({ route, navigation }) => {
 
   const handleSaveChanges = async () => {
     try {
-      // Lógica para salvar as alterações do beneficiário
-      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(beneficiario),
-      });
+      const response = await axios.put(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`, beneficiario);
 
-      if (response.ok) {
+      if (response.status === 200) {
         console.log('Alterações salvas com sucesso!');
-        // Navegar de volta para a tela de detalhes ou lista após salvar
         navigation.goBack();
       } else {
-        console.error('Erro ao salvar alterações');
+        Alert.alert('Erro', 'Erro ao salvar alterações');
       }
     } catch (error) {
       console.error('Erro:', error);
     }
   };
 
+    
+
   return (   
     <Body>
       <Header/>
       <BackButton/>
-      <ScrollView style={styles.container}>
+      <ScrollView>
+      <View style={styles.container}>
         
         <Text style={styles.title}>Editar Beneficiário</Text>
+         
         <TextInput
           label="Nome"
           value={beneficiario.nome}
@@ -111,9 +109,9 @@ const EditScreen = ({ route, navigation }) => {
           onChangeText={(text) => setBeneficiario({ ...beneficiario, cidade: text })}
         />
         <TextInput
-          label="Foto"
-          value={beneficiario.foto}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, foto: text })}
+          label="Estado"
+          value={beneficiario.estado}
+          onChangeText={(text) => setBeneficiario({ ...beneficiario, estado: text })}
         />
       
         <Button icon="content-save" mode="contained"
@@ -122,7 +120,8 @@ const EditScreen = ({ route, navigation }) => {
         onPress={handleSaveChanges}>
           Salvar Alterações
         </Button>
-      </ScrollView>
+      </View>
+    </ScrollView>
     </Body>
   );
 };
