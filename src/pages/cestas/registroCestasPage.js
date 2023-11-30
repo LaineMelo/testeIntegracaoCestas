@@ -52,8 +52,6 @@ const RegistroCestaPage = () => {
       } else {
         Alert.alert('Erro ao fazer a solicitação para a API:', response.statusText);
       }
-    } catch (error) {
-      Alert.alert('Erro ao fazer a solicitação para a API:', error.message);
     } finally {
       setLoading(false);
     }

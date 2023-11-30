@@ -48,6 +48,8 @@ const CadastroNecessidadesBeneficiarioPage = () => {
       }
     } catch (error) {
       Alert.alert('Erro', error.message || 'Erro ao salvar os dados!');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,7 +81,8 @@ const CadastroNecessidadesBeneficiarioPage = () => {
         <Button
           icon="content-save"
           mode="contained"
-          onPress={handleSubmit}disabled={loading}>
+          onPress={handleSubmit}
+          disabled={loading}>
           {loading ? <ActivityIndicator color="white" /> : 'Cadastrar'}
         </Button>
 
