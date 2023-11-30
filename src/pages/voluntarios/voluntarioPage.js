@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList, RefreshControl } from 'react-native';
-import { TextInput, Button, Text, Card, FAB } from 'react-native-paper';
+import { TextInput, Button, Text, Card, FAB, ActivityIndicator } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import BackButton from '../../components/BackButton';
@@ -9,6 +9,7 @@ import Header from '../../components/Header';
 import Body from '../../components/Body';
 
 const VoluntarioPage = () => {
+
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -18,6 +19,8 @@ const VoluntarioPage = () => {
 
   const [voluntarioId, setVoluntarioId] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+
+  
 
 
   useEffect(() => {

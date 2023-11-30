@@ -19,8 +19,11 @@ const CadastroDependentesPage = () => {
   const [parentesco, setParentesco] = useState("");
   const [cpf, setCpf] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const handleCadastroDependente = async () => {
     try {
+      setLoading(true);
 
       const response = await fetch('https://cestasgestor.azurewebsites.net/api/Dependentes'
         , {
@@ -33,23 +36,19 @@ const CadastroDependentesPage = () => {
             nome,
             parentesco,
             cpf,
-           
-
           }),
-
-
         });
 
-        setIdBeneficiario ('');
-        setNome('');
-        setParentesco('');
-        setCpf('');
+      setIdBeneficiario('');
+      setNome('');
+      setParentesco('');
+      setCpf('');
 
       if (response.ok) {
-        Alert.alert('Salvo','Dependente registrado com sucesso!');
+        Alert.alert('Salvo', 'Dependente registrado com sucesso!');
         navigation.goBack();
       } else {
-        Alert.alert('Erro','Erro ao registrar dependente!');
+        Alert.alert('Erro', 'Erro ao registrar dependente!');
 
       }
     } catch (error) {
@@ -70,12 +69,12 @@ const CadastroDependentesPage = () => {
       </Text>
 
       <TextInput
-          style={styles.input}
-          mode="outlined"
-          label="Id do Beneficiário"
-          value={idBeneficiario}
-          onChangeText={text => setIdBeneficiario(text)}
-        />
+        style={styles.input}
+        mode="outlined"
+        label="Id do Beneficiário"
+        value={idBeneficiario}
+        onChangeText={text => setIdBeneficiario(text)}
+      />
 
       <TextInput
         style={styles.input}
@@ -110,7 +109,9 @@ const CadastroDependentesPage = () => {
           style={styles.button}
           icon="content-save"
           mode="contained"
-          onPress={handleCadastroDependente}>
+          onPress={handleCadastroDependente}
+          disabled={loading}>
+          {loading ? <ActivityIndicator color="white" /> : 'Cadastrar'}
           Cadastrar
         </Button>
       </View>

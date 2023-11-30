@@ -1,29 +1,31 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { useState } from 'react';
 import { Button } from 'react-native-paper';
 import { StyleSheet, View, Alert } from 'react-native';
-import { TextInput, Text } from 'react-native-paper';
+import { TextInput, Text, ActivityIndicator } from 'react-native-paper';
 
-import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Body from '../../components/Body';
 
 import BackButton from '../../components/BackButton';
 
+import { useNavigation } from '@react-navigation/native';
+
 const RegistroCestaPage = () => {
 
-  const [idBeneficiario, setIdBeneficiario] = useState("");
-  const [idVoluntario, setIdVoluntario] = useState("");
-  const [quantidadeCesta, setQuantidadeCesta] = useState("");
-  const [dataEntrega, setDataEntrega] = useState("");
+  const navigation = useNavigation();
+
+  const [idBeneficiario, setIdBeneficiario] = useState('');
+  const [idVoluntario, setIdVoluntario] = useState('');
+  const [quantidadeCesta, setQuantidadeCesta] = useState('');
   const [dataAtual, setDataAtual] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleRegistro = async () => {
     try {
+      setLoading(true);
 
       const dataAtual = new Date();
-      // Formatar a data e hora no formato ISO 8601
       const dataEntrega = dataAtual.toISOString();
 
       const data = {
@@ -33,27 +35,32 @@ const RegistroCestaPage = () => {
         dataEntrega: dataAtual,
       };
 
+      const response = await fetch('https://cestasgestor.azurewebsites.net/api/RegistroCesta', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-      // Fazer uma solicitação POST para a API com os dados do formulário
-      const response = await axios.post('https://cestasgestor.azurewebsites.net/api/RegistroCesta'
-        , data);
+      if (response.ok) {
+        setIdBeneficiario('');
+        setQuantidadeCesta('');
 
-        setIdBeneficiario (''),
-        setQuantidadeCesta (''),
-
-      // Aqui, você pode lidar com a resposta da API conforme necessário
-      Alert.alert('Cesta registrada com sucesso!');
-      navigation.goBack();
+        Alert.alert('Cesta registrada com sucesso!');
+        navigation.goBack();
+      } else {
+        Alert.alert('Erro ao fazer a solicitação para a API:', response.statusText);
+      }
     } catch (error) {
-      // Lidar com erros, como falha na conexão ou resposta inválida
-      Alert.alert('Erro ao fazer a solicitação para a API:', error);
+      Alert.alert('Erro ao fazer a solicitação para a API:', error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    // Obter a data e hora atuais
     const dataHoraAtual = new Date();
-    // Formatar a data e hora no formato desejado
     const formatoDataHora = {
       year: 'numeric',
       month: '2-digit',
@@ -64,10 +71,9 @@ const RegistroCestaPage = () => {
       timeZoneName: 'short',
     };
     const dataHoraFormatada = dataHoraAtual.toLocaleString(undefined, formatoDataHora);
-
-    // Definir a data formatada no estado
     setDataAtual(dataHoraFormatada);
   }, []);
+
 
   return (
     
@@ -122,8 +128,9 @@ const RegistroCestaPage = () => {
             style={styles.button}
             icon="content-save"
             mode="contained"
-            onPress={handleRegistro}>
-            Registrar
+            onPress={handleRegistro}
+            disabled={loading}>
+            {loading ? <ActivityIndicator color="white" /> : 'Cadastrar'}
           </Button>
         </View>
 

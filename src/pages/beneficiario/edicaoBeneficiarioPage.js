@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
-import axios from 'axios';
 
 import Header from '../../components/Header';
 import BackButton from '../../components/BackButton';
@@ -27,31 +26,44 @@ const EditScreen = ({ route, navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`);
-        setBeneficiario(response.data);
+        const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setBeneficiario(data);
+        } else {
+          console.error('Erro ao buscar detalhes do beneficiário:', response.status);
+        }
       } catch (error) {
         console.error('Erro ao buscar detalhes do beneficiário:', error);
       }
     };
-
+  
     fetchData();
   }, [beneficiarioId]);
-
+  
   const handleSaveChanges = async () => {
     try {
-      const response = await axios.put(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`, beneficiario);
-
+      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(beneficiario),
+      });
+  
       if (response.ok) {
         console.log('Alterações salvas com sucesso!');
         // Navegar de volta para a tela de detalhes ou lista após salvar
         navigation.goBack();
       } else {
-        Alert.alert('Erro:','Erro ao salvar alterações');
+        const errorData = await response.json();
+        Alert.alert('Erro:', `Erro ao salvar alterações: ${JSON.stringify(errorData)}`);
       }
     } catch (error) {
       console.error('Erro:', error);
     }
   };
+  
 
     
 

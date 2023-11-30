@@ -1,47 +1,56 @@
-import React, { useState, route } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
 import { StyleSheet, Alert } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
-import axios from 'axios';
 
-import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Body from '../../components/Body';
 
 import BackButton from '../../components/BackButton';
+import { useNavigation } from '@react-navigation/native';
 
-const CadastroNecessidadesBeneficiarioPage = ({ route }) => {
+const CadastroNecessidadesBeneficiarioPage = () => {
 
-
+  const navigation = useNavigation();
+  
   const [listaNecessidades, setListaNecessidades] = useState("");
-
   const [idBeneficiario, setIdBeneficiario] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     const data = {
       idBeneficiario,
-      listaNecessidades,    
-    }
-
+      listaNecessidades,
+    };
+  
     try {
-      const response = await axios.post('https://cestasgestor.azurewebsites.net/api/ListaNecessidades', data);
+      setLoading(true);
 
-      setIdBeneficiario('');
-      setListaNecessidades('');
-
-      Alert.alert('Salvo','Dados salvos com sucesso!');
-      navigation.goBack();
-      
+      const response = await fetch('https://cestasgestor.azurewebsites.net/api/ListaNecessidades', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (response.ok) {
+        setIdBeneficiario('');
+        setListaNecessidades('');
+  
+        Alert.alert('Salvo', 'Dados salvos com sucesso!');
+        navigation.goBack();
+      } else {
+        const errorText = await response.text();
+        Alert.alert('Erro', errorText || 'Erro ao salvar os dados!');
+      }
     } catch (error) {
-      Alert.alert(error);
-      alert('Erro','Erro ao salvar os dados!');
+      Alert.alert('Erro', error.message || 'Erro ao salvar os dados!');
     }
   };
 
-
-  
 
 
   return (
@@ -70,8 +79,8 @@ const CadastroNecessidadesBeneficiarioPage = ({ route }) => {
         <Button
           icon="content-save"
           mode="contained"
-          onPress={handleSubmit}>
-          Cadastrar
+          onPress={handleSubmit}disabled={loading}>
+          {loading ? <ActivityIndicator color="white" /> : 'Cadastrar'}
         </Button>
 
       </Body>

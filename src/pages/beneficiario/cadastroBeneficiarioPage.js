@@ -4,8 +4,6 @@ import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
 
-
-import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Body from '../../components/Body';
 

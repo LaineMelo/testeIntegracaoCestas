@@ -24,6 +24,7 @@ const CadastroVoluntarioPage = () => {
   const [bairro, setBairro] = useState("");
   const [numero, setNumero] = useState("");
   const [cidade, setCidade] = useState("");
+  
   const [loading, setLoading] = useState(false);
 
   const handleCadastro = async () => {
@@ -166,7 +167,8 @@ const CadastroVoluntarioPage = () => {
             style={styles.button}
             icon="content-save"
             mode="contained"
-            onPress={handleCadastro} disabled={loading}>
+            onPress={handleCadastro} 
+            disabled={loading}>
             {loading ? <ActivityIndicator color="white" /> : 'Cadastrar'}
           </Button>
         </View>
