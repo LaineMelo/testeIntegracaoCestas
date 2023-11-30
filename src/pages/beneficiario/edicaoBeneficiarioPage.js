@@ -41,11 +41,12 @@ const EditScreen = ({ route, navigation }) => {
     try {
       const response = await axios.put(`https://cestasgestor.azurewebsites.net/api/Beneficiarios/${beneficiarioId}`, beneficiario);
 
-      if (response.status === 200) {
+      if (response.ok) {
         console.log('Alterações salvas com sucesso!');
+        // Navegar de volta para a tela de detalhes ou lista após salvar
         navigation.goBack();
       } else {
-        Alert.alert('Erro', 'Erro ao salvar alterações');
+        Alert.alert('Erro:','Erro ao salvar alterações');
       }
     } catch (error) {
       console.error('Erro:', error);
@@ -63,57 +64,15 @@ const EditScreen = ({ route, navigation }) => {
         
         <Text style={styles.title}>Editar Beneficiário</Text>
          
-        <TextInput
-          label="Nome"
-          value={beneficiario.nome}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, nome: text })}
-        />
-        <TextInput
-          label="Apelido"
-          value={beneficiario.apelido}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, apelido: text })}
-        />
-        <TextInput
-          label="RG"
-          value={beneficiario.rg}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, rg: text })}
-        />
-        <TextInput
-          label="CPF"
-          value={beneficiario.cpf}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, cpf: text })}
-        />
-        <TextInput
-          label="Telefone"
-          value={beneficiario.telefone}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, telefone: text })}
-        />
-        <TextInput
-          label="Logradouro"
-          value={beneficiario.logradouro}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, logradouro: text })}
-        />
-        <TextInput
-          label="Bairro"
-          value={beneficiario.bairro}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, bairro: text })}
-        />
-        <TextInput
-          label="Número"
-          value={beneficiario.numero}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, numero: text })}
-        />
-        <TextInput
-          label="Cidade"
-          value={beneficiario.cidade}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, cidade: text })}
-        />
-        <TextInput
-          label="Estado"
-          value={beneficiario.estado}
-          onChangeText={(text) => setBeneficiario({ ...beneficiario, estado: text })}
-        />
-      
+        {Object.keys(beneficiario).map((key) => (
+            <TextInput
+              key={key}
+              label={key.charAt(0).toUpperCase() + key.slice(1)}
+              value={beneficiario[key]}
+              onChangeText={(text) => setBeneficiario({ ...beneficiario, [key]: text })}
+            />
+          ))}
+        
         <Button icon="content-save" mode="contained"
         style={{marginTop:15,
           marginBottom:15}}

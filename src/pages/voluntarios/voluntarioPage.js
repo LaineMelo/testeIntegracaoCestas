@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, RefreshControl } from 'react-native';
 import { TextInput, Button, Text, Card, FAB } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,6 +17,8 @@ const VoluntarioPage = () => {
   const [error, setError] = useState(null);
 
   const [voluntarioId, setVoluntarioId] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
+
 
   useEffect(() => {
     // Lógica para buscar voluntários com base no nome
@@ -96,8 +98,8 @@ const VoluntarioPage = () => {
   return (
     <Body>
 
-      <Header/>
-      <BackButton/>
+      <Header />
+      <BackButton />
 
       <Text style={styles.title}>Pesquisar Voluntário</Text>
       <TextInput
@@ -109,12 +111,12 @@ const VoluntarioPage = () => {
         onChangeText={(text) => setSearchText(text)}
       />
       <Button icon="card-search-outline" mode="contained"
-      style={{
-        marginRight:20,
-        marginLeft:20,
-        marginBottom:10,
-      }}
-      onPress={handleSearch}>
+        style={{
+          marginRight: 20,
+          marginLeft: 20,
+          marginBottom: 10,
+        }}
+        onPress={handleSearch}>
         Pesquisar
       </Button>
 
@@ -124,9 +126,9 @@ const VoluntarioPage = () => {
         renderItem={({ item }) => (
 
           <Card
-          style={{
-            margin:15,
-          }}>
+            style={{
+              margin: 15,
+            }}>
             <Card.Content>
               <Text variant="bodyMedium">Nome: {item.nome}</Text>
               <Text variant="bodyMedium">CPF: {item.cpf}</Text>
@@ -141,6 +143,16 @@ const VoluntarioPage = () => {
             </Card.Actions>
           </Card>
         )}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);
+              handleSearch(); // Chame a função fetchData() ou outra função para buscar dados
+              setRefreshing(false);
+            }}
+          />
+        }
       />
 
       <FAB
@@ -153,7 +165,7 @@ const VoluntarioPage = () => {
 };
 
 const styles = StyleSheet.create({
-  
+
   title: {
     fontSize: 24,
     marginTop: 10,
@@ -162,11 +174,11 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: 'relative',
-    width:250,
-    marginTop:20,
+    width: 250,
+    marginTop: 20,
     bottom: 10,
     left: 120,
-    fontWeight:700
+    fontWeight: 700
 
   },
 });

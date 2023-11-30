@@ -72,7 +72,7 @@ const CadastroDependentesPage = () => {
       <TextInput
           style={styles.input}
           mode="outlined"
-          label="Beneficiário"
+          label="Id do Beneficiário"
           value={idBeneficiario}
           onChangeText={text => setIdBeneficiario(text)}
         />

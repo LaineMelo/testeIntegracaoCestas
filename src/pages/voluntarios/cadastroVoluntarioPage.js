@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from 'react-native-paper';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { Button, ActivityIndicator } from 'react-native-paper';
+import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { TextInput, Text, Divider } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
 
@@ -24,9 +24,11 @@ const CadastroVoluntarioPage = () => {
   const [bairro, setBairro] = useState("");
   const [numero, setNumero] = useState("");
   const [cidade, setCidade] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleCadastro = async () => {
     try {
+      setLoading(true);
 
       const response = await fetch('https://cestasgestor.azurewebsites.net/api/Voluntario'
         , {
@@ -46,10 +48,20 @@ const CadastroVoluntarioPage = () => {
           }),
         });
 
+      setNome('');
+      setCpf('');
+      setEmail('');
+      setPassword('');
+      setLogradouro('');
+      setBairro('');
+      setNumero('');
+      setCidade('');
+
       if (response.ok) {
-        console.log('Voluntário registrado com sucesso!');
+        Alert.alert('Salvo', 'Voluntário registrado com sucesso!');
+        navigation.goBack();
       } else {
-        console.error('Erro ao registrar voluntário!');
+        Alert.alert('Erro', 'Erro ao registrar voluntário!');
 
       }
     } catch (error) {
@@ -58,109 +70,109 @@ const CadastroVoluntarioPage = () => {
   };
 
   return (
-    
-<Body>
+
+    <Body>
       <Header title={'Cadastrar Perfil'} />
       <BackButton />
 
-        <Text
-          style={styles.title}
-          variant="displayLarge">
-          Voluntário
-        </Text>
+      <Text
+        style={styles.title}
+        variant="displayLarge">
+        Voluntário
+      </Text>
+
+      <View style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 10
+      }}>
+        <Avatar.Icon size={50} icon="account" />
+      </View>
+
+      <ScrollView>
+        <TextInput
+          style={styles.input}
+          mode="outlined"
+          label="Nome"
+          value={nome}
+          onChangeText={text => setNome(text)}
+        />
+
+
+        <TextInput
+          style={styles.input}
+          mode="outlined"
+          label="CPF"
+          value={cpf}
+          onChangeText={text => setCpf(text)}
+        />
+
+        <TextInput
+          style={styles.input}
+          mode="outlined"
+          label="email"
+          value={email}
+          onChangeText={text => setEmail(text)}
+        />
+
+        <TextInput
+          style={styles.input}
+          mode="outlined"
+          label="password"
+          value={password}
+          onChangeText={text => setPassword(text)}
+        />
+
+        <TextInput
+          style={styles.input}
+          mode="outlined"
+          label="Logradouro"
+          value={logradouro}
+          onChangeText={text => setLogradouro(text)}
+        />
+
+        <TextInput
+          style={styles.input}
+          mode="outlined"
+          label="Bairro"
+          value={bairro}
+          onChangeText={text => setBairro(text)}
+        />
+
+        <TextInput
+          style={styles.input}
+          mode="outlined"
+          label="Número"
+          value={numero}
+          onChangeText={text => setNumero(text)}
+        />
+
+
+        <TextInput
+          style={styles.input}
+          mode="outlined"
+          label="Cidade"
+          value={cidade}
+          onChangeText={text => setCidade(text)}
+        />
 
         <View style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
-          marginBottom: 10 
+          alignItems: "center"
         }}>
-          <Avatar.Icon size={50} icon="account" />
+          <Button
+            style={styles.button}
+            icon="content-save"
+            mode="contained"
+            onPress={handleCadastro} disabled={loading}>
+            {loading ? <ActivityIndicator color="white" /> : 'Cadastrar'}
+          </Button>
         </View>
+      </ScrollView>
+    </Body>
 
-        <ScrollView>
-          <TextInput
-            style={styles.input}
-            mode="outlined"
-            label="Nome"
-            value={nome}
-            onChangeText={text => setNome(text)}
-          />
-
-
-          <TextInput
-            style={styles.input}
-            mode="outlined"
-            label="CPF"
-            value={cpf}
-            onChangeText={text => setCpf(text)}
-          />
-
-          <TextInput
-            style={styles.input}
-            mode="outlined"
-            label="email"
-            value={email}
-            onChangeText={text => setEmail(text)}
-          />
-
-          <TextInput
-            style={styles.input}
-            mode="outlined"
-            label="password"
-            value={password}
-            onChangeText={text => setPassword(text)}
-          />
-
-          <TextInput
-            style={styles.input}
-            mode="outlined"
-            label="Logradouro"
-            value={logradouro}
-            onChangeText={text => setLogradouro(text)}
-          />
-
-          <TextInput
-            style={styles.input}
-            mode="outlined"
-            label="Bairro"
-            value={bairro}
-            onChangeText={text => setBairro(text)}
-          />
-
-          <TextInput
-            style={styles.input}
-            mode="outlined"
-            label="Número"
-            value={numero}
-            onChangeText={text => setNumero(text)}
-          />
-
-
-          <TextInput
-            style={styles.input}
-            mode="outlined"
-            label="Cidade"
-            value={cidade}
-            onChangeText={text => setCidade(text)}
-          />
-
-          <View style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
-            <Button
-              style={styles.button}
-              icon="content-save"
-              mode="contained"
-              onPress={handleCadastro}>
-              Cadastrar
-            </Button>
-          </View>
-        </ScrollView>
-      </Body>
-    
   );
 
 }

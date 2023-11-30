@@ -13,7 +13,7 @@ const BackButton = () => {
       };
 
     return(
-        <Appbar.Header>
+        <Appbar.Header style={{ height: 30, paddin:0 }}>
           <Appbar.BackAction onPress={handleBackPress} />
           <Appbar.Content title="Voltar"
           titleStyle={{ fontSize: 14}}></Appbar.Content>

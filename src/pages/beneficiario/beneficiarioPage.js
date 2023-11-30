@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList, Alert } from 'react-native';
+import { View, StyleSheet, FlatList, ScrollView, RefreshControl } from 'react-native';
 import { TextInput, Button, Text, Card, FAB } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
@@ -21,51 +21,43 @@ const BeneficiarioPage = () => {
   const [error, setError] = useState(null);
 
   const [beneficiarioId, setBeneficiarioId] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
 
   useEffect(() => {
-    // Lógica para buscar beneficiários com base no nome
-    setLoading(true);
-    setError(null);
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios?nome=${searchText}`,);
-        if (!response.ok) {
-          console.error('Erro na solicitação:', response.status);
-          return;
-        }
-        const data = await response.json();
-        setSearchResults(data);
-
-      } catch (error) {
-        console.error('Erro ao buscar beneficiários:', error);
-      }
-    };
     fetchData();
   }, [searchText]);
 
-  const handleSearch = () => {
-    console.log('Botão de pesquisa pressionado');
-    // Altere a consulta para pesquisar por nome
-    const fetchData = async () => {
-      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios?nome=${searchText}`);
-
+  const fetchData = async () => {
+    setRefreshing(true);
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(`https://cestasgestor.azurewebsites.net/api/Beneficiarios?nome=${searchText}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       if (!response.ok) {
         console.error('Erro na solicitação:', response.status);
         return;
-
       }
-
       const data = await response.json();
       setSearchResults(data);
-    };
+    } catch (error) {
+      console.error('Erro ao buscar beneficiários:', error);
+    } finally {
+      setRefreshing(false);
+      setLoading(false);
+    }
+  };
 
+  const handleSearch = () => {
     fetchData();
-
   };
 
   const handleNavigateToEdit = (beneficiarioId) => {
-    // Use o operador for para iterar sobre a lista de resultados
     for (const item of searchResults) {
       if (item.id === beneficiarioId) {
         const beneficiarioIdParaEditar = {
@@ -115,6 +107,12 @@ const BeneficiarioPage = () => {
         />
         <SearchButton
           onPress={handleSearch} />
+
+<ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={fetchData} />
+        }
+      >
         
           <FlatList
           style={{
@@ -147,7 +145,7 @@ const BeneficiarioPage = () => {
                 </Card.Actions>
               </Card>
             )}
-          />
+          /></ScrollView>
         
        
       <View>
