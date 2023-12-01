@@ -17,8 +17,7 @@ const CadastroNecessidadesBeneficiarioPage = () => {
   const [idBeneficiario, setIdBeneficiario] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
   
     const data = {
       idBeneficiario,
