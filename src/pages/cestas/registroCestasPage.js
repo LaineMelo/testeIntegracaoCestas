@@ -18,7 +18,9 @@ const RegistroCestaPage = () => {
   const [idBeneficiario, setIdBeneficiario] = useState('');
   const [idVoluntario, setIdVoluntario] = useState('');
   const [quantidadeCesta, setQuantidadeCesta] = useState('');
-  const [dataAtual, setDataAtual] = useState('');
+  
+  const [dataEntrega, setDataEntrega] = useState('');
+
   const [loading, setLoading] = useState(false);
 
   const handleRegistro = async () => {
@@ -32,7 +34,7 @@ const RegistroCestaPage = () => {
         idBeneficiario,
         idVoluntario: 0,
         quantidadeCesta,
-        dataEntrega: dataAtual,
+        dataEntrega: "2023-11-30T14:30:00.000Z",
       };
 
       const response = await fetch('https://cestasgestor.azurewebsites.net/api/RegistroCesta', {
@@ -57,20 +59,6 @@ const RegistroCestaPage = () => {
     }
   };
 
-  useEffect(() => {
-    const dataHoraAtual = new Date();
-    const formatoDataHora = {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      timeZoneName: 'short',
-    };
-    const dataHoraFormatada = dataHoraAtual.toLocaleString(undefined, formatoDataHora);
-    setDataAtual(dataHoraFormatada);
-  }, []);
 
 
   return (
@@ -112,7 +100,7 @@ const RegistroCestaPage = () => {
         <TextInput
           style={styles.input}
           mode="outlined"
-          label={`Data: ${dataAtual}`}
+          label='Data'
           value={dataEntrega}
           editable={false}
         />
