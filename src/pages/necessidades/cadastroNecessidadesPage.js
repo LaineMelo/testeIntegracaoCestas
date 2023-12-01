@@ -39,14 +39,11 @@ const CadastroNecessidadesBeneficiarioPage = () => {
         setIdBeneficiario('');
         setListaNecessidades('');
   
-        Alert.alert('Salvo', 'Dados salvos com sucesso!');
+        Alert.alert('Objeto registrado com sucesso!');
         navigation.goBack();
       } else {
-        const errorText = await response.text();
-        Alert.alert('Erro', errorText || 'Erro ao salvar os dados!');
+        Alert.alert('Erro ao fazer a solicitação para a API:', response.statusText);
       }
-    } catch (error) {
-      Alert.alert('Erro', error.message || 'Erro ao salvar os dados!');
     } finally {
       setLoading(false);
     }

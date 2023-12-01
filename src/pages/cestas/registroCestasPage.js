@@ -27,9 +27,6 @@ const RegistroCestaPage = () => {
     try {
       setLoading(true);
 
-      const dataAtual = new Date();
-      const dataEntrega = dataAtual.toISOString();
-
       const data = {
         idBeneficiario,
         idVoluntario: 0,
